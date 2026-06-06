@@ -1,0 +1,122 @@
+# IFT Pc/Pf reference values per filière and region.
+# Source: tabs Scoring_GC / Scoring_Viticulture / Scoring_Arboriculture
+# in grille-audit-hvev4-v1.14 - vf.xlsx.
+#
+# Format:
+#   filiere:        gc | viticulture | arboriculture | horticulture
+#   region:         NUTS-2 name | bassin viticole | region fruitière
+#   ift_type:       herbicide | hors_herbicide
+#   pc:             plancher (20e percentile)
+#   pf:             plafond (70e percentile)
+#
+# IMPORTANT: these are an indicative subset of the official grid. The
+# full reference covers ~50 region × filière combinations and must be
+# refreshed annually when the ministry updates the grille. See
+# bin/import_scoring_tables.rb to regenerate this file from a fresh
+# Excel grid.
+
+# ---- Grandes cultures (region = NUTS-2 français) ----
+- filiere: gc
+  region: Île-de-France
+  ift_type: herbicide
+  pc: 1.5
+  pf: 2.5
+- filiere: gc
+  region: Île-de-France
+  ift_type: hors_herbicide
+  pc: 4.0
+  pf: 6.5
+- filiere: gc
+  region: Bretagne
+  ift_type: herbicide
+  pc: 1.2
+  pf: 2.2
+- filiere: gc
+  region: Bretagne
+  ift_type: hors_herbicide
+  pc: 3.5
+  pf: 6.0
+- filiere: gc
+  region: Nouvelle-Aquitaine
+  ift_type: herbicide
+  pc: 1.4
+  pf: 2.6
+- filiere: gc
+  region: Nouvelle-Aquitaine
+  ift_type: hors_herbicide
+  pc: 3.8
+  pf: 6.4
+- filiere: gc
+  region: Auvergne-Rhône-Alpes
+  ift_type: herbicide
+  pc: 1.3
+  pf: 2.4
+- filiere: gc
+  region: Auvergne-Rhône-Alpes
+  ift_type: hors_herbicide
+  pc: 3.6
+  pf: 6.2
+
+# ---- Viticulture (region = bassin viticole) ----
+- filiere: viticulture
+  region: Champagne
+  ift_type: herbicide
+  pc: 0.5
+  pf: 1.2
+- filiere: viticulture
+  region: Champagne
+  ift_type: hors_herbicide
+  pc: 11.0
+  pf: 18.0
+- filiere: viticulture
+  region: Bordeaux
+  ift_type: herbicide
+  pc: 0.8
+  pf: 1.5
+- filiere: viticulture
+  region: Bordeaux
+  ift_type: hors_herbicide
+  pc: 13.0
+  pf: 20.0
+- filiere: viticulture
+  region: Bourgogne-Beaujolais
+  ift_type: herbicide
+  pc: 0.6
+  pf: 1.3
+- filiere: viticulture
+  region: Bourgogne-Beaujolais
+  ift_type: hors_herbicide
+  pc: 12.0
+  pf: 17.5
+- filiere: viticulture
+  region: Languedoc-Roussillon
+  ift_type: herbicide
+  pc: 0.7
+  pf: 1.4
+- filiere: viticulture
+  region: Languedoc-Roussillon
+  ift_type: hors_herbicide
+  pc: 8.5
+  pf: 14.0
+
+# ---- Arboriculture (region = région fruitière) ----
+- filiere: arboriculture
+  region: Pommiers-Sud-Est
+  ift_type: herbicide
+  pc: 1.5
+  pf: 2.5
+- filiere: arboriculture
+  region: Pommiers-Sud-Est
+  ift_type: hors_herbicide
+  pc: 22.0
+  pf: 32.0
+- filiere: arboriculture
+  region: Pêchers-Vallée-du-Rhône
+  ift_type: herbicide
+  pc: 1.0
+  pf: 2.0
+- filiere: arboriculture
+  region: Pêchers-Vallée-du-Rhône
+  ift_type: hors_herbicide
+  pc: 14.0
+  pf: 22.0

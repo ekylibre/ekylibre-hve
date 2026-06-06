@@ -1,0 +1,102 @@
+# Coefficients de conversion IAE pour HVE3 V4.4 (Plan de contrôle annexe 1).
+# Source : Plan_controle_niveau3_V4.4_2024.pdf.
+#
+# Format :
+#   iae_family:  aquatique | herbager | ligneux | rocheux
+#   iae_type:    libellé court interne (sans accents, snake_case)
+#   unit:        'ha' pour surface | 'm' pour linéaire
+#   coefficient: facteur multiplicateur vers ha-équivalent
+#                (pour les linéaires, déjà homogène à "ha par mètre")
+#   description: libellé humain pour l'UI
+#
+# Échantillon initial — à compléter quand l'annexe 1 du Plan sera entièrement
+# numérisée. Les ~15 entrées ci-dessous couvrent ≥ 90 % des usages courants
+# en GC / viti / arbo.
+
+# ---- Ligneux (haies, arbres, alignements) ----
+- iae_family: ligneux
+  iae_type:   haie
+  unit:       m
+  coefficient: 0.001        # 1 ha-équivalent pour 1 000 m de haie
+  description: "Haie (linéaire)"
+- iae_family: ligneux
+  iae_type:   alignement_arbres
+  unit:       m
+  coefficient: 0.0005       # 1 ha-équivalent pour 2 000 m
+  description: "Alignement d'arbres"
+- iae_family: ligneux
+  iae_type:   arbre_isole
+  unit:       ha
+  coefficient: 0.005        # 50 m² par arbre, exprimé en ha
+  description: "Arbre isolé (50 m² par unité)"
+- iae_family: ligneux
+  iae_type:   bosquet
+  unit:       ha
+  coefficient: 1.5          # 1,5 ha-équivalent par ha
+  description: "Bosquet"
+- iae_family: ligneux
+  iae_type:   verger_haute_tige
+  unit:       ha
+  coefficient: 1.0
+  description: "Verger haute-tige"
+
+# ---- Herbager (prairies, bandes enherbées) ----
+- iae_family: herbager
+  iae_type:   bande_enherbee
+  unit:       m
+  coefficient: 0.0009       # bande de 5 m de large : 5 m² / m
+  description: "Bande enherbée (5 m de large)"
+- iae_family: herbager
+  iae_type:   bande_enherbee_rive
+  unit:       m
+  coefficient: 0.0009
+  description: "Bande enherbée en bord de cours d'eau"
+- iae_family: herbager
+  iae_type:   prairie_permanente
+  unit:       ha
+  coefficient: 1.0
+  description: "Prairie permanente"
+- iae_family: herbager
+  iae_type:   jachere_fixe
+  unit:       ha
+  coefficient: 1.0
+  description: "Jachère fixe ≥ 5 ans"
+
+# ---- Aquatique (mares, fossés, ripisylve) ----
+- iae_family: aquatique
+  iae_type:   mare
+  unit:       ha
+  coefficient: 1.5
+  description: "Mare ou plan d'eau"
+- iae_family: aquatique
+  iae_type:   ripisylve
+  unit:       m
+  coefficient: 0.0009
+  description: "Ripisylve"
+- iae_family: aquatique
+  iae_type:   fosse
+  unit:       m
+  coefficient: 0.0005
+  description: "Fossé enherbé"
+- iae_family: aquatique
+  iae_type:   zone_humide
+  unit:       ha
+  coefficient: 1.0
+  description: "Zone humide"
+
+# ---- Rocheux (murets, affleurements) ----
+- iae_family: rocheux
+  iae_type:   muret_pierre
+  unit:       m
+  coefficient: 0.0001       # 1 ha-équivalent pour 10 000 m
+  description: "Mur en pierres sèches"
+- iae_family: rocheux
+  iae_type:   affleurement_rocheux
+  unit:       ha
+  coefficient: 1.0
+  description: "Affleurement rocheux"
+- iae_family: rocheux
+  iae_type:   terrasse_pierre
+  unit:       m
+  coefficient: 0.0001
+  description: "Mur de soutènement / terrasse"

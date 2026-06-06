@@ -1,0 +1,23 @@
+= form_for @hve_audit, url: backend_hve_audits_path do |f|
+  = f.error_messages
+  .field
+    = f.label :campaign
+    = f.referenced_association :campaign
+  .field
+    = f.label :referentiel_version
+    = f.text_field :referentiel_version, readonly: true
+  .field
+    = f.label :filiere
+    = f.text_field :filiere, placeholder: :auto_detected.tl(default: 'Auto-détectée')
+  .field
+    = f.label :status
+    = f.select :status, ::HveAudit::VALID_STATUSES.map { |s| [s.tl(default: s.humanize), s] }
+  .field
+    = f.label :started_on
+    = f.date_field :started_on
+  .field
+    = f.label :closed_on
+    = f.date_field :closed_on
+
+  .actions
+    = f.submit

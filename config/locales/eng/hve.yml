@@ -1,0 +1,63 @@
+eng:
+  activerecord:
+    models:
+      hve_audit:
+        one: "HVE audit"
+        other: "HVE audits"
+      hve_audit_item:
+        one: "HVE audit item"
+        other: "HVE audit items"
+      hve_cmr_product:
+        one: "HVE CMR product"
+        other: "HVE CMR products"
+      hve_nitrogen_export_coefficient:
+        one: "Nitrogen export coefficient"
+        other: "Nitrogen export coefficients"
+      hve_scoring_table:
+        one: "IFT scoring table"
+        other: "IFT scoring tables"
+    attributes:
+      hve_audit:
+        campaign: "Campaign"
+        referentiel_version: "Referential version"
+        filiere: "Dominant filière"
+        status: "Status"
+        started_on: "Started on"
+        closed_on: "Closed on"
+        verdict: "Verdict"
+        score_biodiversity: "Biodiversity score"
+        score_phytosanitary: "Phytosanitary score"
+        score_fertilisation: "Fertilisation score"
+        score_irrigation: "Irrigation score"
+        uses_cmr1_without_derogation: "CMR1 without derogation"
+  enumerize:
+    hve_audit:
+      status:
+        draft: "Draft"
+        submitted: "Submitted"
+        certified: "Certified"
+        refused: "Refused"
+      verdict:
+        compliant: "Compliant"
+        non_compliant: "Non compliant"
+        cmr1_blocked: "CMR1 blocked"
+  labels:
+    hve: "HVE"
+    hve_certification: "HVE certification"
+    hve_audits: "HVE audits"
+    pending_calculation: "Pending"
+    threshold_met: "≥ 10"
+    below_threshold: "Below threshold"
+    no_items_yet: "No items yet — scoring computations will land in PR2-5."
+    verdict_compliant: "Audit complies with referential V4.4."
+    verdict_non_compliant: "At least one theme is below the 10-point threshold."
+    verdict_cmr1_blocked: "A CMR1 product was used without derogation: audit invalid."
+    verdict_pending: "Verdict not yet computed."
+    items: "Audited items"
+    auto_detected: "Auto-detected"
+  hve:
+    themes:
+      biodiversity: "Biodiversity"
+      phytosanitary: "Phytosanitary"
+      fertilisation: "Fertilisation"
+      irrigation: "Irrigation"

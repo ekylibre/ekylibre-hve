@@ -1,0 +1,116 @@
+fra:
+  activerecord:
+    models:
+      hve_audit:
+        one: "Audit HVE"
+        other: "Audits HVE"
+      hve_audit_item:
+        one: "Item d'audit HVE"
+        other: "Items d'audit HVE"
+      hve_cmr_product:
+        one: "Produit CMR HVE"
+        other: "Produits CMR HVE"
+      hve_nitrogen_export_coefficient:
+        one: "Coefficient d'export azote"
+        other: "Coefficients d'export azote"
+      hve_scoring_table:
+        one: "Table de scoring IFT"
+        other: "Tables de scoring IFT"
+      hve_biodiversity_item:
+        one: "Élément IAE"
+        other: "Éléments IAE"
+      hve_iae_coefficient:
+        one: "Coefficient IAE"
+        other: "Coefficients IAE"
+    attributes:
+      hve_audit:
+        campaign: "Campagne"
+        referentiel_version: "Version du référentiel"
+        filiere: "Filière dominante"
+        status: "Statut"
+        started_on: "Démarré le"
+        closed_on: "Clôturé le"
+        verdict: "Verdict"
+        score_biodiversity: "Score biodiversité"
+        score_phytosanitary: "Score phytosanitaire"
+        score_fertilisation: "Score fertilisation"
+        score_irrigation: "Score irrigation"
+        uses_cmr1_without_derogation: "CMR1 sans dérogation"
+      hve_biodiversity_item:
+        iae_family: "Famille IAE"
+        iae_type: "Type"
+        surface_or_length: "Surface / Longueur"
+        unit: "Unité"
+        coefficient: "Coefficient"
+        equivalent_iae_ha: "Équivalent IAE (ha)"
+        location_notes: "Notes"
+  enumerize:
+    hve_audit:
+      status:
+        draft: "Brouillon"
+        submitted: "Transmis"
+        certified: "Certifié"
+        refused: "Refusé"
+      verdict:
+        compliant: "Conforme"
+        non_compliant: "Non conforme"
+        cmr1_blocked: "Bloqué CMR1"
+  labels:
+    hve: "HVE"
+    hve_certification: "Certification HVE"
+    hve_audits: "Audits HVE"
+    pending_calculation: "À calculer"
+    threshold_met: "Seuil ≥ 10"
+    below_threshold: "Sous seuil"
+    no_items_yet: "Aucun item — les calculs seront ajoutés en PR2-5."
+    verdict_compliant: "Audit conforme au référentiel V4.4."
+    verdict_non_compliant: "Au moins un thème est sous le seuil de 10 points."
+    verdict_cmr1_blocked: "Utilisation d'un CMR1 sans dérogation : audit invalide."
+    verdict_pending: "Verdict non encore calculé."
+    items: "Items audités"
+    auto_detected: "Auto-détectée"
+    biodiversity_section: "Saisie Biodiversité"
+    iae_inventory: "Inventaire IAE (Infrastructures Agro-Écologiques)"
+    iae_family: "Famille IAE"
+    iae_type: "Type"
+    surface_or_length: "Surface / Longueur"
+    unit: "Unité"
+    coefficient: "Coefficient"
+    equivalent_iae_ha: "Équivalent IAE (ha)"
+    no_iae_yet: "Aucun élément IAE saisi."
+    add_iae: "Ajouter un élément IAE"
+    biodiversity_items_overview: "Items biodiversité"
+    item_label: "Libellé"
+    auto: "Auto"
+    manual: "Manuel"
+    edit_or_view: "Saisir / Voir"
+    recompute: "Recalculer"
+    scores_recomputed: "Scores recalculés."
+    biodiversity_gate_open: "Inventaire IAE manquant — audit non éligible."
+    gate_explanation: "Le critère 4.1 (IAE) est obligatoire : l'audit ne peut être validé sans inventaire."
+    clone_from_previous: "Cloner depuis audit précédent"
+    clone_confirm: "Cloner l'inventaire IAE de l'audit précédent ?"
+    clone_done: "Cloné %{count} items depuis l'audit précédent."
+    no_previous_audit: "Aucun audit précédent trouvé."
+    back_to_audit: "Retour à l'audit"
+    auto_lookup: "Auto-déduit"
+  hve:
+    themes:
+      biodiversity: "Biodiversité"
+      phytosanitary: "Phytosanitaire"
+      fertilisation: "Fertilisation"
+      irrigation: "Irrigation"
+    iae_families:
+      aquatique: "Aquatique"
+      herbager: "Herbager"
+      ligneux: "Ligneux"
+      rocheux: "Rocheux"
+    items:
+      "4.1": "IAE / Terres arables"
+      "4.2": "Taille des parcelles"
+      "4.3": "Poids de la culture principale"
+      "4.4": "Nombre d'espèces végétales"
+      "4.5": "Nombre d'espèces animales"
+      "4.6": "Présence de ruches"
+      "4.7": "Variétés / races menacées"
+      "4.8": "Qualité biologique du sol"

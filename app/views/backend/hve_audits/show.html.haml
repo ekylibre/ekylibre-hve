@@ -1,0 +1,75 @@
+- main_period_selector
+
+- main_toolbar do |t|
+  = t.edit @hve_audit
+  = t.destroy
+
+%h1
+  HVE
+  = @hve_audit.campaign&.name
+  %small= @hve_audit.referentiel_version
+
+.row
+  - ::HveAudit::THEMES.each do |theme|
+    .col-md-3
+      .panel.panel-default
+        .panel-heading
+          %h4= "hve.themes.#{theme}".tl(default: theme.humanize)
+        .panel-body
+          - score = @hve_audit.send("score_#{theme}")
+          - max   = EkylibreHve::MAX_POINTS[theme.to_sym]
+          - threshold_ok = score.present? && score >= EkylibreHve::CERTIFICATION_THRESHOLD
+          %p.h3
+            = score.present? ? score.to_f.round(1) : '—'
+            %small= " / #{max}"
+          %p
+            - if score.nil?
+              %span.label.label-default= :pending_calculation.tl(default: 'À calculer')
+            - elsif threshold_ok
+              %span.label.label-success= :threshold_met.tl(default: "Seuil ≥ #{EkylibreHve::CERTIFICATION_THRESHOLD}")
+            - else
+              %span.label.label-warning= :below_threshold.tl(default: "< #{EkylibreHve::CERTIFICATION_THRESHOLD}")
+          - if theme == 'biodiversity'
+            %p
+              = link_to :edit_or_view.tl(default: 'Saisir / Voir'),
+                        biodiversity_backend_hve_audit_path(@hve_audit),
+                        class: 'btn btn-xs btn-default'
+
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        %h4= :verdict.tl(default: 'Verdict')
+      .panel-body
+        - case @hve_audit.verdict
+        - when 'compliant'
+          .alert.alert-success= :verdict_compliant.tl(default: 'Audit conforme au référentiel.')
+        - when 'cmr1_blocked'
+          .alert.alert-danger= :verdict_cmr1_blocked.tl(default: 'CMR1 sans dérogation : audit invalide.')
+        - when 'non_compliant'
+          .alert.alert-warning= :verdict_non_compliant.tl(default: 'Audit non conforme : un seuil au moins n\'est pas atteint.')
+        - else
+          .alert.alert-info= :verdict_pending.tl(default: 'Verdict non encore calculé.')
+
+%h2= :items.tl(default: 'Items audités')
+- if @hve_audit.items.empty?
+  %p.text-muted= :no_items_yet.tl(default: 'Aucun item — les calculs seront ajoutés en PR2-5.')
+- else
+  - @items_by_theme.each do |theme, items|
+    %h3= theme.humanize
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th= :code.tl(default: 'Code')
+          %th= :value.tl(default: 'Valeur')
+          %th= :points.tl(default: 'Points')
+          %th= :max.tl(default: 'Max')
+          %th= :auto.tl(default: 'Auto')
+      %tbody
+        - items.each do |item|
+          %tr
+            %td= item.code
+            %td= item.value_used&.to_f
+            %td= item.points&.to_f
+            %td= item.points_max&.to_f
+            %td= item.auto_computed? ? '✓' : ''

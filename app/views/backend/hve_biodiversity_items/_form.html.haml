@@ -1,0 +1,26 @@
+- url = @item.persisted? ? backend_hve_audit_biodiversity_item_path(@audit, @item) : backend_hve_audit_biodiversity_items_path(@audit)
+- method = @item.persisted? ? :patch : :post
+= form_for @item, url: url, method: method, as: :hve_biodiversity_item do |f|
+  = f.error_messages
+  .field
+    = f.label :iae_family
+    = f.select :iae_family, HveIaeCoefficient::FAMILIES.map { |fam| ["hve.iae_families.#{fam}".tl(default: fam.humanize), fam] }
+  .field
+    = f.label :iae_type
+    = f.text_field :iae_type, placeholder: 'haie, mare, bande_enherbee, …'
+  .field
+    = f.label :surface_or_length
+    = f.number_field :surface_or_length, step: 'any'
+  .field
+    = f.label :unit
+    = f.select :unit, HveIaeCoefficient::UNITS.map { |u| [u, u] }
+  .field
+    = f.label :coefficient
+    = f.number_field :coefficient, step: 'any', placeholder: :auto_lookup.tl(default: 'Auto-déduit')
+  .field
+    = f.label :location_notes
+    = f.text_field :location_notes
+
+  .actions
+    = f.submit
+    = link_to :cancel.tl, biodiversity_backend_hve_audit_path(@audit), class: 'btn btn-link'

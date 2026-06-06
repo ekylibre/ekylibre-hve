@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<navigation>
+  <part name="hve" icon="leaf" after-part="production">
+    <group name="hve_certification">
+      <item name="hve_audits">
+        <page to="backend/hve_audits#index"/>
+        <page to="backend/hve_audits#show"/>
+        <page to="backend/hve_audits#edit"/>
+        <page to="backend/hve_audits#new"/>
+        <page to="backend/hve_audits#create"/>
+        <page to="backend/hve_audits#destroy"/>
+        <page to="backend/hve_audits#list"/>
+      </item>
+    </group>
+  </part>
+</navigation>

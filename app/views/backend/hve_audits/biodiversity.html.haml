@@ -1,0 +1,76 @@
+- main_toolbar do |t|
+  = link_to :recompute.tl(default: 'Recalculer'),
+            recompute_biodiversity_backend_hve_audit_path(@hve_audit),
+            method: :post, class: 'btn btn-primary'
+  = link_to :clone_from_previous.tl(default: 'Cloner depuis audit précédent'),
+            clone_from_previous_backend_hve_audit_path(@hve_audit),
+            method: :post, class: 'btn btn-default',
+            data: { confirm: :clone_confirm.tl(default: 'Cloner l\'inventaire IAE de l\'audit précédent ?') }
+  = link_to :back_to_audit.tl(default: 'Retour à l\'audit'),
+            backend_hve_audit_path(@hve_audit), class: 'btn btn-link'
+
+%h1
+  = :biodiversity_section.tl(default: 'Biodiversité')
+  %small= @hve_audit.campaign&.name
+
+- gate_open = @hve_audit.metadata['biodiversity_gate'] == 'open'
+- if @hve_audit.metadata['biodiversity_gate'] == 'closed'
+  .alert.alert-warning
+    %strong= :biodiversity_gate_open.tl(default: 'Inventaire IAE manquant — audit non éligible.')
+    %p= :gate_explanation.tl(default: 'Le critère 4.1 (IAE) est obligatoire : l\'audit ne peut être validé sans inventaire.')
+
+.row
+  .col-md-12
+    %h2= :iae_inventory.tl(default: 'Inventaire IAE')
+    - if @biodiversity_items.empty?
+      %p.text-muted= :no_iae_yet.tl(default: 'Aucun élément IAE saisi.')
+    - else
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th= :iae_family.tl(default: 'Famille')
+            %th= :iae_type.tl(default: 'Type')
+            %th= :surface_or_length.tl(default: 'Surface/Longueur')
+            %th= :unit.tl(default: 'Unité')
+            %th= :coefficient.tl(default: 'Coefficient')
+            %th= :equivalent_iae_ha.tl(default: 'Équivalent IAE (ha)')
+            %th
+        %tbody
+          - @biodiversity_items.each do |item|
+            %tr
+              %td= "hve.iae_families.#{item.iae_family}".tl(default: item.iae_family.humanize)
+              %td= item.iae_type.humanize
+              %td= item.surface_or_length.to_f
+              %td= item.unit
+              %td= item.coefficient&.to_f
+              %td= item.equivalent_iae_ha&.to_f&.round(4)
+              %td
+                = link_to :edit.tl, edit_backend_hve_audit_biodiversity_item_path(@hve_audit, item)
+                = link_to :destroy.tl, backend_hve_audit_biodiversity_item_path(@hve_audit, item),
+                          method: :delete, data: { confirm: :are_you_sure.tl }
+    %p
+      = link_to :add_iae.tl(default: 'Ajouter un élément IAE'),
+                new_backend_hve_audit_biodiversity_item_path(@hve_audit), class: 'btn btn-default'
+
+%h2= :biodiversity_items_overview.tl(default: 'Items biodiversité')
+%table.table.table-bordered.table-condensed
+  %thead
+    %tr
+      %th= :code.tl(default: 'Code')
+      %th= :item_label.tl(default: 'Libellé')
+      %th= :value.tl(default: 'Valeur')
+      %th= :points.tl(default: 'Points')
+      %th= :max.tl(default: 'Max')
+      %th= :type.tl(default: 'Type')
+      %th= :notes.tl(default: 'Notes')
+  %tbody
+    - %w[4.1 4.2 4.3 4.4 4.5 4.6 4.7 4.8].each do |code|
+      - item = @items_by_code[code]
+      %tr
+        %td= code
+        %td= "hve.items.#{code}".tl(default: code)
+        %td= item ? item.value_used&.to_f : '—'
+        %td= item ? item.points&.to_f : '—'
+        %td= item ? item.points_max&.to_f : '—'
+        %td= item && item.auto_computed? ? :auto.tl(default: 'Auto') : :manual.tl(default: 'Manuel')
+        %td= item&.notes
